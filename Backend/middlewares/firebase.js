@@ -1,5 +1,4 @@
 var admin = require('firebase-admin');
-var admin = require("firebase-admin");
 
 var serviceAccount = require("./key.json")
 
@@ -9,7 +8,7 @@ admin.initializeApp({
 });
 const verifyToken = async function (req, res, next) {
     try {
-       
+
         const key = req.headers.authorization;
         const {
             uid

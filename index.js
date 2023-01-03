@@ -2,10 +2,6 @@ const express = require("express");
 const app = express()
 const port = process.env.PORT || 8082;
 const mongoose = require("mongoose")
-const history = require('connect-history-api-fallback')
-var morgan = require('morgan')
-//const Buffet = require('./Backend/models/buffet')
-//const TableReserve = require('./Backend/models/Table_reserve');
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
@@ -20,13 +16,11 @@ mongoose.connect(uri, {
   useNewUrlParser: "true",
 })
 mongoose.connection.on("error", err => {
-  //console.log("err", err)
+  console.log("err", err)
 })
 mongoose.connection.on("connected", (err, res) => {
-  //console.log("mongoose is connected")
+  console.log("mongoose is connected")
 })
-app.use(morgan('tiny'))
-
 
 const routers = require('./adminbro')
 app.use('/admin', routers)
@@ -66,10 +60,6 @@ app.use(RoomRouter)
 app.use(OrderRouter);
 app.use(BillingRouter)
 
-app.use(history({
-  verbose: false,
-  disableDotRule: false
-}));
 app.listen(port, function (err) {
   if (!err) {
     console.log("server is running at ", port)
